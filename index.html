@@ -1,0 +1,83 @@
+<html>
+<head>
+    <title>{{ item.title }}</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+<style>
+.move-this-to-sass {display:none;}
+
+.page-header {margin-top:80px;}
+.hidden {display:none;}
+</style>
+</head>
+<body>
+  <body role="document">
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Are You Still There Monitoring</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <!-- menu items | class active for first -->
+            <li><a href="{{ item.url }}}">{{ item.title }}</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div> <!-- /.navbar -->
+
+    <!-- content items -->
+    <div class="container page-{{ item.id }}" role="main">
+      <div class="page-header">
+        <h1>{{ item.header }}</h1>
+      </div>
+      <div class="page-section">
+        <p>{{ item.body }}</p>
+      </div>
+    </div> <!-- /container -->
+    <!-- scripts -->
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', '{{ item.ga-id }}', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <!-- to be added to separate js -->
+    <script>
+        // show page onload
+        var url = document.location.toString();
+        if (url.match('#')) {
+            $('.navbar-nav a[href=#'+url.split('#')[1]+']').tab('show');
+        } 
+
+        // Change hash for page-reload
+        $('.navbar-nav a').on('shown', function (e) {
+            window.location.hash = e.target.hash;
+        });
+
+        // change page on nav click
+        $('.navbar-nav a').on('click', function (e) {
+            $('.navbar-nav a[href=#'+url.split('#')[1]+']').parent().addClass('active');
+        });
+    </script>
+</body>
+</html>
